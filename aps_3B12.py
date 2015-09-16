@@ -1,4 +1,4 @@
-#! python3
+#! /usr/bin/python3
 
 import serial
 import time
@@ -134,5 +134,5 @@ while(1):
 
 	aps_print('LOC;')
 
-print('CC:A 0.7;')
+
 
