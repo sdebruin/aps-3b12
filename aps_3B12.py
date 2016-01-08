@@ -16,7 +16,7 @@ def error_msg():
 	#print('exit - quit application')
 	
 def aps_print(text):
-	#print(text)
+	print(text)
 	ser.write(bytes(text,"utf-8"))
 	time.sleep(.03)
 	
@@ -118,11 +118,11 @@ while(1):
 		# One-parameter commands
 		value = textIn[1].strip(' ')
 		if(command == 'amp'):
-			if(int(value) < 4):
-				aps_print('CC:A ' + str(value) + ';')
-			else:
-				print('Maximum current is currently set to 4A')
-				aps_print('CC:A 4;');
+			#if(int(value) < 4):
+			aps_print('CC:A ' + str(value) + ';')
+			#else:
+				#print('Maximum current is currently set to 4A')
+				#aps_print('CC:A 4;');
 		if(command == 'watt'):
 			setWatt(value)
 		if(command == 'inc'):
