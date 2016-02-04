@@ -35,15 +35,19 @@ def setWatt(value):
 	aps_print('MEAS:VOLT?;')
 	voltage = ser.read(8)
 	#print(float(voltage))
-	current = float(value) / float(voltage)
+	if(float(voltage) > 0):
+		current = float(value) / float(voltage)
+	else:
+		current = float(value) / 120
 	aps_print('CC:A ' + str(current) + ';')
 	time.sleep(1)
 	aps_print('MEAS:POW?;')
 	power = ser.read(8)
 	#print(float(power))
-	scale = float(value) / float(power)
-	current = current * scale
-	aps_print('CC:A ' + str(current) + ';')
+	if(float(power) > 0):
+		scale = float(value) / float(power)
+		current = current * scale
+		aps_print('CC:A ' + str(current) + ';')
 	
 def help():
 	print("Commands:")
