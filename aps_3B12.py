@@ -1,7 +1,8 @@
-#! /usr/bin/python3
+#! /usr/bin/python
 
 import serial
 import time
+import os
 
 wattage = 0
 inc = 25
@@ -17,7 +18,8 @@ def error_msg():
 	
 def aps_print(text):
 	#print(text)
-	ser.write(bytes(text,"utf-8"))
+	#ser.write(bytes(text,"utf-8"))
+	ser.write(str(text))
 	time.sleep(.03)
 	
 def setWatt(value):
@@ -57,7 +59,17 @@ def help():
 	print("help\tDisplay help")
 	print("exit\tTurn load off and exit application")
 
-ser = serial.Serial('/dev/com1', 9600)
+for root, dirs, filenames in os.walk('/dev'):
+	    for f in filenames:
+	    	#print(f)
+	    	if('com1' in f or 'ttyUSB' in f or 'tty.usbserial' in f or 'tty.usbmodem' in f):
+	    		ser = serial.Serial('/dev/' + f)
+	    		ser = serial.Serial(
+	    			port='/dev/' + f,
+	    			baudrate=9600
+				)
+
+#ser = serial.Serial('/dev/com1', 9600)
 
 
 print()
